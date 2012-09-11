@@ -1,0 +1,1 @@
+Use this jquery plugin to add a read more button below a text container.
