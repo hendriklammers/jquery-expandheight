@@ -4,45 +4,48 @@
 	<meta charset="UTF-8">
 	<title>expandHeight jquery plugin</title>
 	<style type="text/css">
-		body {
-			margin: 0;
-			padding: 0;
-			font: 16px/24px Arial, sans-serif;
-		}
-		.wrap {
-			width: 500px;
-			margin: 0 auto;
-		}
-		article {
-			margin-top: 48px;
-			width: 500px;
-			
-		}
+	body {
+		margin: 0;
+		padding: 0;
+		font: 16px/24px Arial, sans-serif;
+	}
+	.wrap {
+		width: 500px;
+		margin: 0 auto;
+	}
+	article {
+		margin-top: 48px;
+		width: 500px;
+	}
+	p {
+		margin-top: 0;
+		margin-bottom: 24px;
+	}
 	</style>
 </head>
 <body>
 	<div class="wrap">
 		<h1>Testing plugin</h1>
 		<article class="first">
+			<h2>First article</h2>
 			<div class="expand">
-				<h2>First article</h2>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem tenetur nemo sequi architecto iusto odit ad expedita obcaecati quasi repellat culpa nesciunt reiciendis est impedit numquam velit sit quam quidem. Architecto accusamus consectetur rem ea possimus sint culpa officia tenetur quos vel nam facilis nisi voluptate! Vero temporibus tempora similique doloribus voluptate corporis veniam ea qui eaque error maiores sequi labore architecto mollitia ullam officiis consequuntur officia necessitatibus rem ducimus deserunt quis deleniti modi ut eius. Dolore quia facere atque praesentium libero ipsum voluptate repellat delectus in magnam ut pariatur officiis sapiente illo quae tenetur quod accusamus quibusdam autem consectetur? Nesciunt obcaecati illo commodi blanditiis sint hic maxime est laboriosam atque qui sunt quisquam vel iure adipisci repudiandae quaerat nisi!</p>
 			</div>
 		</article>
 		<article class="second">
+			<h2>Second article</h2>
 			<div class="expand">
-				<h2>Second article</h2>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit quia dignissimos esse similique magnam ipsa maxime provident reprehenderit laboriosam architecto. Excepturi molestias molestiae magnam unde sit vitae laborum necessitatibus soluta veniam accusantium fugit deleniti nesciunt voluptatibus voluptate facere nisi optio temporibus adipisci dicta laudantium eos esse illum eius aspernatur ratione odio exercitationem cumque. Cumque adipisci saepe quas quibusdam incidunt voluptate numquam nulla sapiente molestiae dolores fugiat quod labore porro aliquid mollitia tempore rem doloribus fugit consectetur laborum. Consequuntur neque nulla voluptatem doloremque nisi iste odit officia nihil rerum soluta cum cumque at laudantium suscipit reprehenderit hic possimus unde voluptatibus repellendus dolorum. Totam blanditiis est facilis deleniti nulla odio illo nobis et nihil iusto officiis aliquid veritatis architecto praesentium quisquam minima hic nisi assumenda iste adipisci tenetur ex maxime esse eaque nostrum sit ullam id quia ipsum dicta quo culpa sint mollitia voluptates eius rem aut dolorem quas delectus minus consectetur voluptatem cum alias dolor expedita labore? Possimus odio temporibus ullam consequuntur excepturi maxime at tenetur cumque dolor nemo illum non id atque autem tempore sunt ipsa voluptatum cupiditate soluta quidem. Incidunt est amet eius ipsa illo earum porro odit possimus exercitationem eum neque nulla ad velit. Mollitia sequi ipsum odit ratione ducimus dolore nulla dolor minima. Porro natus laborum dicta!</p>
 			</div>
 		</article>
 	</div>
 	
 	<script src="js/jquery.js"></script>
-	<<script src="js/jquery.expandheight.js"></script>
+	<script src="js/jquery.expandheight.js"></script>
 	<script>
 	(function() {
 		
-		$('article').expandHeight();
+		$('.expand').expandHeight();
 
 	})();
 	</script>

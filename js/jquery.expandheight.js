@@ -12,46 +12,108 @@
 
 ;(function ($, window, undefined) {
 
-  // Create the defaults once
-  var pluginName = 'expandHeight',
-      document = window.document,
-      defaults = {
-        propertyName: "value"
-      };
+    // Create the defaults once
+    var pluginName = 'expandHeight',
+        document = window.document,
+        defaults = {
+            moreLabel: 'Lees verder',
+            lessLabel: 'Sluit',
+            lineHeight: 24,
+            maxLines: 6,
+            easing: 'swing'
+        };
 
-  // The actual plugin constructor
-  function Plugin(element, options) {
-    this.element = element;
+    function Plugin(element, options) {
+        this.element = $(element);
+        this.options = $.extend({}, defaults, options);
 
-    // jQuery has an extend method which merges the contents of two or
-    // more objects, storing the result in the first object. The first object
-    // is generally empty as we don't want to alter the default options for
-    // future instances of the plugin
-    this.options = $.extend({}, defaults, options) ;
+        this._defaults = defaults;
+        this._name = pluginName;
 
-    this._defaults = defaults;
-    this._name = pluginName;
+        this.init();
+    }
 
-    this.init();
-  }
+    Plugin.prototype.init = function () {
+        this.maxHeight = this.options.maxLines * this.options.lineHeight;
 
-  Plugin.prototype.init = function () {
-    // Place initialization logic here
-    // You already have access to the DOM element and the options via the instance,
-    // e.g., this.element and this.options
+        if (this.element.height() > this.maxHeight) {
+            // Add initial height to data and set new height
+            // Remove 1 line-height to make up for expand button
+            this.element.data('height', this.element.height()).css({
+                height: this.maxHeight - this.options.lineHeight,
+                'overflow': 'hidden'
+            });
+            // Add expand button
+            // this.element.after(new ExpandButton(this.element));
+            this.createButton();
+        }
+    };
 
-    console.log(this.element);
+    Plugin.prototype.createButton = function () {
 
-  };
+        var self = this;
 
-  // A really lightweight plugin wrapper around the constructor,
-  // preventing against multiple instantiations
-  $.fn[pluginName] = function (options) {
-    return this.each(function () {
-      if (!$.data(this, 'plugin_' + pluginName)) {
-        $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
-      }
-    });
-  };
+        // Expand link
+        var moreLink = $('<a>', {
+            href: '#',
+            text: this.options.moreLabel,
+            class: 'more'
+        }).on('click', function (event) {
+            event.preventDefault();
+            console.log($(this).parent());
+
+            // Switch links
+            $(this).hide();
+            lessLink.show();
+
+            // // Animate div to initial height set in data attribute
+            self.element.animate({
+                height: self.element.data('height')
+            }, {
+                duration: 250,
+                queue: false,
+                easing: 'swing'
+            });
+        });
+
+        // Collapse link, will be hidden by default
+        var lessLink = $('<a>', {
+            href: '#',
+            text: this.options.lessLabel,
+            class: 'less'
+        }).on('click', function (event) {
+            event.preventDefault();
+            console.log(self.options.maxHeight - self.options.lineHeight);
+
+            // // Switch links
+            $(this).hide();
+            moreLink.show();
+
+            // // Animate div to initial height set in data attribute
+            self.element.animate({
+                height: self.options.maxHeight - self.options.lineHeight
+            }, {
+                duration: 300,
+                queue: false,
+                easing: 'swing'
+            });
+        }).hide();
+
+        var button = $('<div>', {
+            class: 'expand-button'
+        }).append(moreLink).append(lessLink);
+
+        this.element.after(button);
+    };
+
+    // A really lightweight plugin wrapper around the constructor,
+    // preventing against multiple instantiations
+    $.fn[pluginName] = function (options) {
+        return this.each(function () {
+            if (!$.data(this, 'plugin_' + pluginName)) {
+                $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
+            }
+        });
+    };
 
 }(jQuery, window));
