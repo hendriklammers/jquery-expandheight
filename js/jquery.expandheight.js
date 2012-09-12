@@ -1,7 +1,7 @@
 /*
  * expandHeight - jQuery plugin
  * Add a read more button when text exceeds a certain height
- * Version 0.1
+ * Version 0.4
  *
  * Copyright (c) 2012 Hendrik Lammers
  * http://www.hendriklammers.com
@@ -16,8 +16,8 @@
     var pluginName = 'expandHeight',
         document = window.document,
         defaults = {
-            moreLabel: 'Lees verder',
-            lessLabel: 'Sluit',
+            moreLabel: 'More',
+            lessLabel: 'Less',
             lineHeight: 24,
             maxLines: 6,
             easing: 'swing'
@@ -35,11 +35,12 @@
 
     Plugin.prototype.init = function () {
         this.maxHeight = this.options.maxLines * this.options.lineHeight;
+        this.originalHeight = this.element.height();
 
-        if (this.element.height() > this.maxHeight) {
+        if (this.originalHeight > this.maxHeight) {
             // Add initial height to data and set new height
             // Remove 1 line-height to make up for expand button
-            this.element.data('height', this.element.height()).css({
+            this.element.css({
                 height: this.maxHeight - this.options.lineHeight,
                 'overflow': 'hidden'
             });
@@ -60,7 +61,6 @@
             class: 'more'
         }).on('click', function (event) {
             event.preventDefault();
-            console.log($(this).parent());
 
             // Switch links
             $(this).hide();
@@ -68,7 +68,7 @@
 
             // // Animate div to initial height set in data attribute
             self.element.animate({
-                height: self.element.data('height')
+                height: self.originalHeight
             }, {
                 duration: 250,
                 queue: false,
@@ -83,7 +83,6 @@
             class: 'less'
         }).on('click', function (event) {
             event.preventDefault();
-            console.log(self.options.maxHeight - self.options.lineHeight);
 
             // // Switch links
             $(this).hide();
@@ -91,7 +90,7 @@
 
             // // Animate div to initial height set in data attribute
             self.element.animate({
-                height: self.options.maxHeight - self.options.lineHeight
+                height: self.maxHeight - self.options.lineHeight
             }, {
                 duration: 300,
                 queue: false,
