@@ -41,6 +41,7 @@
         this.maxHeight = this.options.maxLines * this.options.lineHeight;
         this.originalHeight = this.element.height();
 
+        // Only continue when the text height is bigger than the maxHeight
         if (this.originalHeight > this.maxHeight) {
             // Add initial height to data and set new height
             // Remove 1 line-height to make up for expand button
@@ -48,7 +49,7 @@
                 height: this.maxHeight - this.options.lineHeight,
                 'overflow': 'hidden'
             });
-            // Add expand button
+            // Create the expand button
             this.createButton();
         }
     };
@@ -101,10 +102,12 @@
             });
         }).hide();
 
+        // Container holding the 2 links
         var button = $('<div>', {
             class: 'expand-button'
         }).append(moreLink).append(lessLink);
 
+        // Add button below the text
         this.element.after(button);
     };
 
