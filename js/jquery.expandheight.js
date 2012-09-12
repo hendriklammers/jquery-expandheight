@@ -1,7 +1,7 @@
 /*
  * expandHeight - jQuery plugin
  * Add a read more button when text exceeds a certain height
- * Version 0.4
+ * Version 0.9
  *
  * Copyright (c) 2012 Hendrik Lammers
  * http://www.hendriklammers.com
@@ -12,7 +12,6 @@
 
 ;(function ($, window, undefined) {
 
-    // Create the defaults once
     var pluginName = 'expandHeight',
         document = window.document,
         defaults = {
@@ -20,7 +19,8 @@
             lessLabel: 'Less',
             lineHeight: 24,
             maxLines: 6,
-            easing: 'swing'
+            easing: 'swing',
+            duration: 300
         };
 
     function Plugin(element, options) {
@@ -34,6 +34,10 @@
     }
 
     Plugin.prototype.init = function () {
+        // Set lineHeight if user left lineHeight option to auto
+        if (this.options.lineHeight === 'auto') {
+            this.options.lineHeight = this.element.css('line-height');
+        }
         this.maxHeight = this.options.maxLines * this.options.lineHeight;
         this.originalHeight = this.element.height();
 
@@ -45,7 +49,6 @@
                 'overflow': 'hidden'
             });
             // Add expand button
-            // this.element.after(new ExpandButton(this.element));
             this.createButton();
         }
     };
@@ -66,13 +69,13 @@
             $(this).hide();
             lessLink.show();
 
-            // // Animate div to initial height set in data attribute
+            // // Animate div to expanded height
             self.element.animate({
                 height: self.originalHeight
             }, {
-                duration: 250,
+                duration: self.options.duration,
                 queue: false,
-                easing: 'swing'
+                easing: self.options.easing
             });
         });
 
@@ -88,13 +91,13 @@
             $(this).hide();
             moreLink.show();
 
-            // // Animate div to initial height set in data attribute
+            // // Animate div to collapsed height
             self.element.animate({
                 height: self.maxHeight - self.options.lineHeight
             }, {
-                duration: 300,
+                duration: self.options.duration,
                 queue: false,
-                easing: 'swing'
+                easing: self.options.easing
             });
         }).hide();
 
