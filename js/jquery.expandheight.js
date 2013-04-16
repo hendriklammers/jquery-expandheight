@@ -1,7 +1,7 @@
 /*
  * expandHeight - jQuery plugin
  * Add a read more button when text exceeds a certain height
- * Version 0.9
+ * Version 0.1
  *
  * Copyright (c) 2012 Hendrik Lammers
  * http://www.hendriklammers.com
