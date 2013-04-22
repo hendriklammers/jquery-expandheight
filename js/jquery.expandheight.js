@@ -111,12 +111,10 @@
         this.element.after(button);
     };
 
-    // A really lightweight plugin wrapper around the constructor,
-    // preventing against multiple instantiations
-    $.fn[pluginName] = function (options) {
+    $.fn.expandHeight = function (options) {
         return this.each(function () {
-            if (!$.data(this, 'plugin_' + pluginName)) {
-                $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
+            if (!$.data(this, 'plugin_expandHeight')) {
+                $.data(this, 'plugin_expandHeight', new Plugin(this, options));
             }
         });
     };
