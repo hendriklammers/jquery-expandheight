@@ -10,6 +10,9 @@
  * http://opensource.org/licenses/MIT
  */
 
+// TODO: Use the CSS property text-overflow
+// TODO: Add option to use an image or $ element as button
+// TODO: Test in IE and mobile browsers
 ;(function ($, window, undefined) {
 
     var pluginName = 'expandHeight',
