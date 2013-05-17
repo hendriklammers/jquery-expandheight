@@ -1,7 +1,7 @@
 /*
  * expandHeight - jQuery plugin
  * Add a read more button when text exceeds a certain height
- * Version 0.1
+ * Version 0.1.5
  *
  * Copyright (c) 2012 Hendrik Lammers
  * http://www.hendriklammers.com
@@ -20,8 +20,8 @@
         defaults = {
             moreLabel: 'More',
             lessLabel: 'Less',
-            lineHeight: 24,
-            maxLines: 6,
+            lineHeight: 'auto',
+            maxLines: 5,
             easing: 'swing',
             duration: 300
         };
@@ -37,11 +37,16 @@
     }
 
     Plugin.prototype.init = function () {
+		console.log(this.element.css('line-height'));
         // Set lineHeight if user left lineHeight option to auto
         if (this.options.lineHeight === 'auto') {
             this.options.lineHeight = this.element.css('line-height');
         }
-        this.maxHeight = this.options.maxLines * this.options.lineHeight;
+
+		// Make sure lineHeight is an integer
+		this.options.lineHeight = parseInt(this.element.css('line-height'), 10);
+		
+        this.maxHeight = (this.options.maxLines + 1) * this.options.lineHeight;
         this.originalHeight = this.element.height();
 
         // Only continue when the text height is bigger than the maxHeight
