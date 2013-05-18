@@ -23,7 +23,11 @@
             lineHeight: 'auto',
             maxLines: 5,
             easing: 'swing',
-            duration: 300
+			openEasing: null,
+			closeEasing: null,
+            duration: 300,
+			openDuration: null,
+			closeDuration: null
         };
 
     function Plugin(element, options) {
@@ -37,7 +41,7 @@
     }
 
     Plugin.prototype.init = function () {
-		console.log(this.element.css('line-height'));
+		
         // Set lineHeight if user left lineHeight option to auto
         if (this.options.lineHeight === 'auto') {
             this.options.lineHeight = this.element.css('line-height');
@@ -48,6 +52,13 @@
 		
         this.maxHeight = (this.options.maxLines + 1) * this.options.lineHeight;
         this.originalHeight = this.element.height();
+
+		// Animation options
+		// TODO: Refactor?
+		this.options.openEasing = this.options.openEasing || this.options.easing;
+		this.options.closeEasing = this.options.closeEasing || this.options.easing;
+		this.options.openDuration = this.options.openDuration || this.options.duration;
+		this.options.closeDuration = this.options.closeDuration || this.options.duration;
 
         // Only continue when the text height is bigger than the maxHeight
         if (this.originalHeight > this.maxHeight) {
@@ -82,9 +93,9 @@
             self.element.animate({
                 height: self.originalHeight
             }, {
-                duration: self.options.duration,
+                duration: self.options.openDuration,
                 queue: false,
-                easing: self.options.easing
+                easing: self.options.openEasing
             });
         });
 
@@ -104,9 +115,9 @@
             self.element.animate({
                 height: self.maxHeight - self.options.lineHeight
             }, {
-                duration: self.options.duration,
+                duration: self.options.closeDuration,
                 queue: false,
-                easing: self.options.easing
+                easing: self.options.closeEasing
             });
         }).hide();
 
