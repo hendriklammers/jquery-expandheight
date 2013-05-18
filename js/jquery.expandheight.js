@@ -17,9 +17,13 @@
     var pluginName = 'expandHeight',
         document = window.document,
         defaults = {
+			buttonClass: 'expand-button',
             moreLabel: 'More',
             lessLabel: 'Less',
+			moreClass: 'more-link',
+			lessClass: 'less-link',
             lineHeight: 'auto',
+			buttonAlign: 'left',
             maxLines: 5,
             easing: 'swing',
 			openEasing: null,
@@ -73,7 +77,7 @@
         var moreLink = $('<a>', {
             href: '#',
             text: this.options.moreLabel,
-            class: 'more'
+            'class': this.options.moreClass
         }).on('click', function (event) {
             event.preventDefault();
 
@@ -95,7 +99,7 @@
         var lessLink = $('<a>', {
             href: '#',
             text: this.options.lessLabel,
-            class: 'less'
+            'class': this.options.lessClass
         }).on('click', function (event) {
             event.preventDefault();
 
@@ -115,8 +119,8 @@
 
         // Container holding the 2 links
         var button = $('<div>', {
-            class: 'expand-button'
-        }).append(moreLink).append(lessLink);
+            'class': this.options.buttonClass
+        }).css({'text-align': this.options.buttonAlign}).append(moreLink).append(lessLink);
 
         // Add button below the text
         this.element.after(button);
