@@ -46,7 +46,14 @@
 	<script>
 	(function() {
 		
-		$('.expand').expandHeight({openEasing: 'easeOutCirc', openDuration: 200, closeEasing: 'easeOutSine', closeDuration: 700});
+		$('.expand').expandHeight({
+			maxLines: 3,
+			buttonAlign: 'right',
+			openEasing: 'easeOutCirc',
+			openDuration: 200,
+			closeEasing: 'easeOutSine',
+			closeDuration: 700
+			});
 
 	})();
 	</script>
