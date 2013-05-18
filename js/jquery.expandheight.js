@@ -10,7 +10,6 @@
  * http://opensource.org/licenses/MIT
  */
 
-// TODO: Use the CSS property text-overflow
 // TODO: Add option to use an image or $ element as button
 // TODO: Test in IE and mobile browsers
 ;(function ($, window, undefined) {
@@ -53,13 +52,6 @@
         this.maxHeight = (this.options.maxLines + 1) * this.options.lineHeight;
         this.originalHeight = this.element.height();
 
-		// Animation options
-		// TODO: Refactor?
-		this.options.openEasing = this.options.openEasing || this.options.easing;
-		this.options.closeEasing = this.options.closeEasing || this.options.easing;
-		this.options.openDuration = this.options.openDuration || this.options.duration;
-		this.options.closeDuration = this.options.closeDuration || this.options.duration;
-
         // Only continue when the text height is bigger than the maxHeight
         if (this.originalHeight > this.maxHeight) {
             // Add initial height to data and set new height
@@ -93,9 +85,9 @@
             self.element.animate({
                 height: self.originalHeight
             }, {
-                duration: self.options.openDuration,
+                duration: self.options.openDuration || self.options.duration,
                 queue: false,
-                easing: self.options.openEasing
+                easing: self.options.openEasing || self.options.easing
             });
         });
 
@@ -115,9 +107,9 @@
             self.element.animate({
                 height: self.maxHeight - self.options.lineHeight
             }, {
-                duration: self.options.closeDuration,
+                duration: self.options.closeDuration || self.options.duration,
                 queue: false,
-                easing: self.options.closeEasing
+                easing: self.options.closeEasing || self.options.easing
             });
         }).hide();
 
