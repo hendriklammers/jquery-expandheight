@@ -23,7 +23,6 @@
 			moreClass: 'more-link',
 			lessClass: 'less-link',
             lineHeight: 'auto',
-			buttonAlign: 'left',
             maxLines: 5,
             easing: 'swing',
 			openEasing: null,
@@ -120,7 +119,7 @@
         // Container holding the 2 links
         var button = $('<div>', {
             'class': this.options.buttonClass
-        }).css({'text-align': this.options.buttonAlign}).append(moreLink).append(lessLink);
+        }).append(moreLink).append(lessLink);
 
         // Add button below the text
         this.element.after(button);
