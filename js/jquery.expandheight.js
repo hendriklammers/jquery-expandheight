@@ -9,13 +9,12 @@
  * Licensed under the MIT license.
  * http://opensource.org/licenses/MIT
  */
-
-// TODO: Add option to use an image or $ element as button
-// TODO: Test in IE and mobile browsers
-;(function ($, window, undefined) {
+(function ($, window, undefined) {
+	'use strict';
+	// TODO: Add option to use an image or $ element as button
+	// TODO: Test in IE and mobile browsers
 
     var pluginName = 'expandHeight',
-        document = window.document,
         defaults = {
 			buttonClass: 'expand-button',
             moreLabel: 'More',
@@ -43,7 +42,7 @@
     }
 
     Plugin.prototype.init = function () {
-		
+
         // Set lineHeight if user left lineHeight option to auto
         if (this.options.lineHeight === 'auto') {
             this.options.lineHeight = this.element.css('line-height');
@@ -51,7 +50,7 @@
 
 		// Make sure lineHeight is an integer
 		this.options.lineHeight = parseInt(this.element.css('line-height'), 10);
-		
+
         this.maxHeight = (this.options.maxLines + 1) * this.options.lineHeight;
         this.originalHeight = this.element.height();
 
